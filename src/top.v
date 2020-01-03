@@ -35,9 +35,9 @@ module top(
         .Y(y)
     );
 
-    assign LCD_R = BTN_B & (x > 10) & (y > 10) & (x < 790) & (y < 470) ? 5'b00000 : 5'b11111;
-    assign LCD_G = BTN_B & (x > 10) & (y > 10) & (x < 790) & (y < 470) ? 6'b000000 : 6'b111111;
-    assign LCD_B = BTN_B & (x > 10) & (y > 10) & (x < 790) & (y < 470) ? 5'b00000 : 5'b11111;
+    assign LCD_R = BTN_B & (x > 10) & (y > 10) & (x < 50) & (y < 50) ?  5'b11111 : 5'b00000;
+    assign LCD_G = BTN_B & (x > 50) & (y > 50) & (x < 100) & (y < 100) ? 6'b111111 : 6'b000000 ;
+    assign LCD_B = BTN_B & (x > 100) & (y > 100) & (x < 300) & (y < 400) ?  5'b11111 : 5'b00000;
 
     reg [32:0] counter;
     assign LED_R = counter > 32'd8_000_000;
