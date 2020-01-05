@@ -6,9 +6,9 @@
     <Device>gw1n1-004</Device>
     <FileList>
         <File path="src/top.v" type="file.verilog" enable="1"/>
-        <File path="src/tang-nano-lcd.cst" type="file.cst" enable="1"/>
         <File path="src/lcd.v" type="file.verilog" enable="1"/>
         <File path="src/rpll.v" type="file.verilog" enable="1"/>
-        <File path="src/bitmap.v" type="file.verilog" enable="1"/>
+        <File path="src/constraints.cst" type="file.cst" enable="1"/>
+        <File path="src/rom_bitmap.v" type="file.verilog" enable="1"/>
     </FileList>
 </Project>

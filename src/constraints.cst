@@ -1,0 +1,37 @@
+//Copyright (C)2014-2019 Gowin Semiconductor Corporation.
+//All rights reserved. 
+//File Title: Physical Constraints file
+//GOWIN Version: V1.9.3Beta
+//Part Number: GW1N-LV1QN48C6/I5
+//Created Time: Mon 12 30 11:27:43 2019
+
+IO_LOC "xtal" 35;
+IO_LOC "btn_a" 14;
+IO_LOC "btn_b" 15;
+IO_LOC "led_g" 16;
+IO_LOC "led_b" 17;
+IO_LOC "led_r" 18;
+
+IO_LOC "lcd_clk" 11;
+IO_LOC "lcd_hsync" 10;
+IO_LOC "lcd_vsync" 46;
+IO_LOC "lcd_de" 5;
+
+IO_LOC "lcd_r[0]" 27;
+IO_LOC "lcd_r[1]" 28;
+IO_LOC "lcd_r[2]" 29;
+IO_LOC "lcd_r[3]" 30;
+IO_LOC "lcd_r[4]" 31;
+
+IO_LOC "lcd_g[0]" 32;
+IO_LOC "lcd_g[1]" 33;
+IO_LOC "lcd_g[2]" 34;
+IO_LOC "lcd_g[3]" 38;
+IO_LOC "lcd_g[4]" 39;
+IO_LOC "lcd_g[5]" 40;
+
+IO_LOC "lcd_b[0]" 41;
+IO_LOC "lcd_b[1]" 42;
+IO_LOC "lcd_b[2]" 43;
+IO_LOC "lcd_b[3]" 44;
+IO_LOC "lcd_b[4]" 45;

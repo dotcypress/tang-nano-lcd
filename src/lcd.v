@@ -1,13 +1,13 @@
 module LCD
 (
-    input wire CLK,
-    input wire nRST,
-    output wire [9:0] X,
-    output wire [9:0] Y,
-    output wire VSYNC,
-    output wire HSYNC,
-    output wire DE,
-    output wire FRAME_END
+    input clk,
+    input nrst,
+    output [9:0] x,
+    output [9:0] y,
+    output vsync,
+    output hsync,
+    output de,
+    output frame
 );
 
     localparam SCREEN_WIDTH  = 16'd800;
@@ -24,38 +24,38 @@ module LCD
     localparam FRAME_WIDTH  = H_BACKPORCH + H_FRONTPORCH + SCREEN_WIDTH;
     localparam FRAME_HEIGHT = V_BACKPORCH + V_FRONTPORCH + SCREEN_HEIGHT;
 
-    reg [15:0] X_POS;
-    reg [15:0] Y_POS;
+    reg [15:0] x_offset;
+    reg [15:0] y_offset;
 
-    always @(posedge CLK or negedge nRST) begin
-        if (!nRST ) begin
-            Y_POS <= 16'b0;
-            X_POS <= 16'b0;
+    always @(posedge clk or negedge nrst) begin
+        if (!nrst ) begin
+            y_offset <= 16'b0;
+            x_offset <= 16'b0;
         end
-        else if (X_POS == FRAME_WIDTH) begin
-            X_POS <= 16'b0;
-            Y_POS <= Y_POS + 1'b1;
+        else if (x_offset == FRAME_WIDTH) begin
+            x_offset <= 16'b0;
+            y_offset <= y_offset + 1'b1;
         end
-        else if (Y_POS == FRAME_HEIGHT) begin
-            Y_POS <= 16'b0;
-            X_POS <= 16'b0;
+        else if (y_offset == FRAME_HEIGHT) begin
+            y_offset <= 16'b0;
+            x_offset <= 16'b0;
         end
         else begin
-            X_POS <= X_POS + 1'b1;
+            x_offset <= x_offset + 1'b1;
         end
     end
 
-    assign X = X_POS - H_BACKPORCH;
-    assign Y = Y_POS - V_BACKPORCH;
+    assign x = x_offset - H_BACKPORCH;
+    assign y = y_offset - V_BACKPORCH;
 
-    assign VSYNC = ((Y_POS >= V_SYNC ) && (Y_POS <= FRAME_HEIGHT)) ? 1'b0 : 1'b1;
-    assign HSYNC = ((X_POS >= H_SYNC) && (X_POS <= (FRAME_WIDTH - H_FRONTPORCH))) ? 1'b0 : 1'b1;
+    assign vsync = ((y_offset >= V_SYNC ) && (y_offset <= FRAME_HEIGHT)) ? 1'b0 : 1'b1;
+    assign hsync = ((x_offset >= H_SYNC) && (x_offset <= (FRAME_WIDTH - H_FRONTPORCH))) ? 1'b0 : 1'b1;
 
-    assign DE = ((X_POS > H_BACKPORCH) &&
-                (X_POS <= FRAME_WIDTH - H_FRONTPORCH) &&
-                (Y_POS >= V_BACKPORCH) &&
-                (Y_POS <= FRAME_HEIGHT - V_FRONTPORCH - 1)) ? 1'b1 : 1'b0;
+    assign de = ((x_offset > H_BACKPORCH) &&
+                (x_offset <= FRAME_WIDTH - H_FRONTPORCH) &&
+                (y_offset >= V_BACKPORCH) &&
+                (y_offset <= FRAME_HEIGHT - V_FRONTPORCH - 1)) ? 1'b1 : 1'b0;
 
-    assign FRAME_END = ((X == SCREEN_WIDTH - 1) & (Y == SCREEN_HEIGHT));
+    assign frame = (x_offset == FRAME_WIDTH - 1) & (y_offset == FRAME_HEIGHT - 1);
 
 endmodule
