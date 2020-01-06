@@ -13,7 +13,7 @@ module rom_bitmap
 );
 
     reg [7:0] addr;
-    reg rom[(WIDTH * HEIGHT):0]; /* synthesis syn_romstyle = "select_rom" */;
+    reg rom[(WIDTH * HEIGHT):0]; /* synthesis syn_romstyle = "block_rom" */;
 
     initial begin
         $readmemb({"../../src/", BITMAP_PATH}, rom);
